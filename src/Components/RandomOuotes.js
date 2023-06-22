@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import "../App.css";
+import "./RandomQuote.css";
 
 function RandomOuotes() {
   const [quote, setQuote] = useState(null);
@@ -21,14 +21,17 @@ function RandomOuotes() {
   };
 
   return (
+    //add a background pattern later
     <div className="App">
       {quote && (
         <div>
-          <h2>{quote.author}</h2>
-          <p>{quote.content}</p>
+          <p className="quote-content">{'"' + quote.content + '"'}</p>
+          <p className="quote-author">{"-" + quote.author}</p>
         </div>
       )}
-      <button onClick={getQuote}>Generate Quote</button>
+      <button className="quote-button" onClick={getQuote}>
+        New Quote
+      </button>
     </div>
   );
 }
