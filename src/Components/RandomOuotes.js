@@ -1,43 +1,36 @@
 import axios from "axios";
-import React, { useState } from "react";
-import '../App.css';
+import React, { useState, useEffect } from "react";
+import "../App.css";
 
 function RandomOuotes() {
-    const [quote, setQuote] = useState()
+  const [quote, setQuote] = useState(null);
 
-    //this runs the function anytime the component is leaded
-    // useEffect(() => {
-    //     getQuote();
-    //   }, []);
+  //   this runs the function anytime the component is leaded
+  useEffect(() => {
+    getQuote();
+  }, []);
 
-    const getQuote = () =>{
-        axios.get('https://api.quotable.io/random')
-        .then(
-            response => {
-                console.log(response)
-                setQuote(response.data)
-            }
-        ).catch(
-            err => {
-                console.log(err)
-            }
-        )
-    } 
+  const getQuote = async () => {
+    try {
+      const response = await axios.get("https://api.quotable.io/random");
+      console.log(response);
+      setQuote(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    return(
-        <div className="App">
-            <button onClick={getQuote}></button>
-            {/* <ul>
-          {quote.map((item) => (
-            <li key={item.id}>
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
-            </li>
-          ))} */}
-        {/* </ul> */}
+  return (
+    <div className="App">
+      {quote && (
+        <div>
+          <h2>{quote.author}</h2>
+          <p>{quote.content}</p>
         </div>
-    )
-
+      )}
+      <button onClick={getQuote}>Generate Quote</button>
+    </div>
+  );
 }
 
 export default RandomOuotes;
