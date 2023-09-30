@@ -5,7 +5,7 @@ import "./RandomQuote.css";
 function RandomOuotes() {
   const [quote, setQuote] = useState(null);
 
-  //   this runs the function anytime the component is leaded
+  //   this runs the function anytime the component is loaded
   useEffect(() => {
     getQuote();
   }, []);
